@@ -1,137 +1,133 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nolo's Sudoku Board</title>
   <style>
-  body {
-    font-family: 'Lucida Sans', 'Lucida Grande', sans-serif;
-    background: linear-gradient(to bottom right, #ffe6f0, #e6f7ff);
-    color: #cc3399;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    background-image: url('https://www.transparenttextures.com/patterns/heart-circles.png');
-  }
+    body {
+      font-family: 'Lucida Sans', 'Lucida Grande', sans-serif;
+      background: linear-gradient(to bottom right, #ffe6f0, #e6f7ff);
+      color: #cc3399;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-image: url('https://www.transparenttextures.com/patterns/heart-circles.png');
+    }
 
-  h1 {
-    margin: 20px 10px;
-    font-size: 2.2em;
-    color: #ff66b2;
-    text-shadow: 2px 2px #fff0f5;
-    position: relative;
-  }
-
-  h1::after {
-    content: ' ✿';
-    font-size: 1.2em;
-    color: #ff99cc;
-  }
-
-  table {
-    border-collapse: collapse;
-    margin: 10px auto;
-    background-color: #fff0f5;
-    box-shadow: 0 0 15px #fbb1d3;
-    width: fit-content;
-    max-width: 90vw;
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  td {
-    border: 1px solid #cc3399;
-    width: 10vw;
-    max-width: 40px;
-    height: 10vw;
-    max-height: 40px;
-    text-align: center;
-    background: linear-gradient(#fff, #ffe6f0);
-    border-radius: 6px;
-    box-shadow: inset 0 0 3px #cc3399;
-    position: relative;
-  }
-
-  /* Thicker borders for 3x3 blocks */
-  td:nth-child(3), td:nth-child(6) {
-    border-right: 3px solid #990066;
-  }
-  tr:nth-child(3) td, tr:nth-child(6) td {
-    border-bottom: 3px solid #990066;
-  }
-
-  input[type="number"] {
-    width: 100%;
-    height: 100%;
-    font-size: 1.4em;
-    text-align: center;
-    border: none;
-    background-color: transparent;
-    color: #cc3399;
-    font-weight: bold;
-  }
-
-  input[disabled] {
-    background-color: #ffcce6;
-    font-weight: bold;
-    color: #aa0077;
-  }
-
-  .btn {
-    margin: 10px 5px;
-    padding: 12px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    background-color: #ff99cc;
-    color: white;
-    border: none;
-    border-radius: 16px;
-    box-shadow: 0 6px #cc6699;
-    transition: background-color 0.3s ease;
-  }
-
-  .btn:hover {
-    background-color: #ff66b2;
-  }
-
-  .confetti-piece {
-    width: 10px;
-    height: 10px;
-    background-color: #ff99cc;
-    position: absolute;
-    animation: fall 3s linear infinite;
-  }
-
-  .confetti {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 1000;
-  }
-
-  @keyframes fall {
-    0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-  }
-
-  @media (max-width: 480px) {
     h1 {
-      font-size: 1.6em;
+      margin: 20px 10px;
+      font-size: 2.2em;
+      color: #ff66b2;
+      text-shadow: 2px 2px #fff0f5;
+      position: relative;
     }
-    .btn {
-      font-size: 0.85rem;
-      padding: 10px 15px;
+
+    h1::after {
+      content: ' ✿';
+      font-size: 1.2em;
+      color: #ff99cc;
     }
+
+    table {
+      border-collapse: collapse;
+      margin: 10px auto;
+      background-color: #fff0f5;
+      box-shadow: 0 0 15px #fbb1d3;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
     td {
-      font-size: 3vw;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      background: linear-gradient(#fff, #ffe6f0);
+      border: 1px solid #cc3399;
+      box-shadow: inset 0 0 3px #cc3399;
+      position: relative;
     }
-  }
-</style>
+
+    /* Thicker borders for block separation (3x2 blocks) */
+    td:nth-child(3), td:nth-child(6) {
+      border-right: 3px solid #990066;
+    }
+
+    tr:nth-child(2) td, tr:nth-child(4) td, tr:nth-child(6) td {
+      border-bottom: 3px solid #990066;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      height: 100%;
+      font-size: 1.4em;
+      text-align: center;
+      border: none;
+      background-color: transparent;
+      color: #cc3399;
+      font-weight: bold;
+    }
+
+    input[disabled] {
+      background-color: #ffcce6;
+      font-weight: bold;
+      color: #aa0077;
+    }
+
+    .btn {
+      margin: 10px 5px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      background-color: #ff99cc;
+      color: white;
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 6px #cc6699;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #ff66b2;
+    }
+
+    .confetti-piece {
+      width: 10px;
+      height: 10px;
+      background-color: #ff99cc;
+      position: absolute;
+      animation: fall 3s linear infinite;
+    }
+
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1000;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.6em;
+      }
+      .btn {
+        font-size: 0.85rem;
+        padding: 10px 15px;
+      }
+      td {
+        font-size: 3vw;
+      }
+    }
+  </style>
 </head>
 <body>
   <h1>Nolo's Sudoku Board</h1>
@@ -157,7 +153,7 @@
         [0, 0, 3, 0, 0, 0],
         [5, 0, 0, 0, 0, 0],
         [0, 3, 0, 0, 2, 0],
-        [8, 0, 0, 0, 0, 0],
+        [6, 0, 0, 0, 0, 0],
         [0, 2, 0, 4, 0, 1]
       ]
     ];
