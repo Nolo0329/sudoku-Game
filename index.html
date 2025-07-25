@@ -6,81 +6,96 @@
   <title>Nolo's Sudoku Board</title>
   <style>
   body {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-family: 'Cherry Swash', cursive, sans-serif;
+    background: linear-gradient(to bottom right, #ffe6f0, #e6f7ff);
+    color: #cc3399;
+    margin: 0;
+    padding: 0;
     text-align: center;
-    background: linear-gradient(to right, #ffe0f0, #fff5fc);
-    color: #d63384;
+    background-image: url('https://www.transparenttextures.com/patterns/heart-circles.png');
   }
 
   h1 {
-    margin-top: 20px;
-    font-size: 3em;
-    color: #ff1493;
+    margin: 20px 10px;
+    font-size: 2.2em;
+    color: #ff66b2;
     text-shadow: 2px 2px #fff0f5;
-    font-weight: bold;
-    animation: sparkle 2s ease-in-out infinite alternate;
+    position: relative;
   }
 
-  @keyframes sparkle {
-    from { text-shadow: 2px 2px #fff0f5; }
-    to { text-shadow: 2px 2px #ffb6c1; }
+  h1::after {
+    content: ' ✿';
+    font-size: 1.2em;
+    color: #ff99cc;
   }
 
   table {
     border-collapse: collapse;
-    margin: 20px auto;
+    margin: 10px auto;
     background-color: #fff0f5;
-    box-shadow: 0 0 20px #ffcce5;
-    border-radius: 16px;
+    box-shadow: 0 0 15px #fbb1d3;
+    width: 90vw;
+    max-width: 400px;
+    border-radius: 10px;
     overflow: hidden;
   }
 
   td {
-    border: 1px solid #ffb6c1;
-    width: 40px;
-    height: 40px;
+    border: 1px dashed #ffb3e6;
+    width: 10vw;
+    max-width: 40px;
+    height: 10vw;
+    max-height: 40px;
     text-align: center;
-    background-color: #ffe6f2;
+    background: linear-gradient(#fff, #ffe6f0);
+    border-radius: 8px;
   }
 
   input[type="number"] {
-    width: 38px;
-    height: 38px;
-    font-size: 18px;
+    width: 100%;
+    height: 100%;
+    font-size: 4vw;
+    max-font-size: 18px;
     text-align: center;
     border: none;
     background-color: #fff;
-    color: #d63384;
-    border-radius: 10px;
-    box-shadow: inset 0 0 5px #ffb6c1;
+    color: #cc3399;
+    border-radius: 6px;
   }
 
   input[disabled] {
-    background-color: #ffd6ec;
+    background-color: #ffcce6;
     font-weight: bold;
-    color: #c71585;
+    color: #aa0077;
   }
 
   .bold-border {
-    border: 2px solid #d63384;
+    border: 2px solid #cc3399;
   }
 
   .btn {
-    margin: 12px 10px;
-    padding: 14px 26px;
-    font-size: 18px;
+    margin: 10px 5px;
+    padding: 12px 20px;
+    font-size: 1rem;
     cursor: pointer;
-    background-color: #ff85c0;
+    background-color: #ff99cc;
     color: white;
     border: none;
-    border-radius: 12px;
-    box-shadow: 0 5px #cc6699;
-    transition: all 0.3s ease;
+    border-radius: 16px;
+    box-shadow: 0 6px #cc6699;
+    transition: background-color 0.3s ease;
   }
 
   .btn:hover {
-    background-color: #ff69b4;
-    transform: scale(1.05);
+    background-color: #ff66b2;
+  }
+
+  .confetti-piece {
+    width: 10px;
+    height: 10px;
+    background-color: #ff99cc;
+    position: absolute;
+    animation: fall 3s linear infinite;
   }
 
   .confetti {
@@ -94,27 +109,32 @@
     z-index: 1000;
   }
 
-  .confetti-piece {
-    width: 12px;
-    height: 12px;
-    background-color: #ff85c0;
-    position: absolute;
-    border-radius: 50%;
-    animation: fall 3s linear infinite;
+  @keyframes fall {
+    0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
   }
 
-  @keyframes fall {
-    0% { transform: translateY(-100%); opacity: 0.8; }
-    100% { transform: translateY(100vh); opacity: 0; }
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.6em;
+    }
+    .btn {
+      font-size: 0.85rem;
+      padding: 10px 15px;
+    }
+    td {
+      font-size: 3vw;
+    }
   }
 </style>
+
 </head>
 <body>
   <h1>Nolo's Sudoku Board</h1>
   <table id="sudoku-board"></table>
   <div>
     <button class="btn" onclick="checkSolution()">Check Puzzle</button>
-    <button class="btn" onclick="newGame()">New Game </button>
+    <button class="btn" onclick="newGame()">New Game 💅</button>
   </div>
   <div class="confetti" id="confetti-container"></div>
 
